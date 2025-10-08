@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import AllProducts from "./pages/AllProducts";
 import ProductCategory from "./pages/ProductCategory";
 import DetailsProduct from "./pages/DetailsProduct";
+import Cart from "./pages/Cart";
 
 
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:category" element={<ProductCategory />} />
           <Route path="/products/:category/:id" element={<DetailsProduct/>} />
+          <Route path="/cart" element={<Cart/>} />
         </Routes>
       </div>
 
