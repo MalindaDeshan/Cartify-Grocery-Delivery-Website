@@ -19,7 +19,8 @@ app.use(cookieParser());
 app.use(cors({origin: allowedOrigins, credentials: true}));
 
 app.get('/', (req, res) => res.send("API is Working"));
-app.use('/api/users', userRouter);
+app.use('/api/user', userRouter);
+
 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
