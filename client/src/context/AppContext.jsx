@@ -22,6 +22,23 @@ export const AppContextProvider = ({children}) => {
     const [cartItems,setCartItems] = useState({})
     const [searchQuery,setSearchQuery] = useState({})
 
+    //fetch Seller Status
+    const fetchSeller = async () => {
+  try {
+    const { data } = await axios.get('/api/seller/is-auth');
+    if (data.success) {
+      setIsSeller(true);
+      setUser(data.seller); // optional, if your API returns seller details
+    } else {
+      setIsSeller(false);
+    }
+  } catch (error) {
+    console.error("Seller auth check failed:", error);
+    setIsSeller(false);
+  }
+};
+
+
     //fetch all products
     const fetchProducts =  async () =>{
         setProducts(dummyProducts)
@@ -86,6 +103,7 @@ export const AppContextProvider = ({children}) => {
     }
 
     useEffect(() => {
+        fetchSeller()
         fetchProducts()
     },[])
 
