@@ -41,7 +41,16 @@ export const AppContextProvider = ({children}) => {
 
     //fetch all products
     const fetchProducts =  async () =>{
-        setProducts(dummyProducts)
+        try {
+            const {data} = await axios.get('/api/product/list')
+            if(data.success){
+                setProducts(data.products)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     //Add products to cart
@@ -109,7 +118,7 @@ export const AppContextProvider = ({children}) => {
 
     const value = {navigate,user,setUser,setIsSeller,isSeller,showUserLogin,setShowUserLogin,products,
         currency,addToCart,updateCartItem,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,
-    getCartCount,axios}
+    getCartCount,axios,fetchProducts}
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>

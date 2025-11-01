@@ -14,7 +14,7 @@ export const addProduct = async(req, res) => {
         })
     )
 
-    await Product.create({...productData, images: imagesUrl})
+    await Product.create({...productData, image: imagesUrl})
 
     res.json({success: true, message: "Product added successfully"})
 
