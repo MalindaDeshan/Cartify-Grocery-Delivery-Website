@@ -7,6 +7,7 @@ import axios from "axios";
 axios.defaults.withCredentials=true;
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
+
 export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
@@ -37,6 +38,20 @@ export const AppContextProvider = ({children}) => {
     setIsSeller(false);
   }
 };
+
+    //Fetch User Auth Status,User Data and Cart Items
+     const fetchUser = async () => {
+        try {
+            const {data} = await axios.get('api/user/is-auth')
+            if(data.success){
+                setUser(data.user)
+                setCartItems(data.user.cartItems)
+            }
+        } catch (error) {
+            setUser(null)
+        }
+     }
+
 
 
     //fetch all products
@@ -112,6 +127,7 @@ export const AppContextProvider = ({children}) => {
     }
 
     useEffect(() => {
+        fetchUser()
         fetchSeller()
         fetchProducts()
     },[])
