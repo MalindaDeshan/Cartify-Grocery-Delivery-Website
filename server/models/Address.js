@@ -13,11 +13,11 @@ const addressSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    addressLine1: {
+    email: {
         type: String,
         required: true
     },
-    email: {
+    addressLine1: { // map street to this
         type: String,
         required: true
     },
