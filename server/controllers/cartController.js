@@ -1,17 +1,18 @@
 import User from "../models/User.js";
 
-//Update user cart data : /api/cart/update
-
-
-
-export const updateCart = async(req, res) => {
+// Update user cart data : /api/cart/update
+export const updateCart = async (req, res) => {
     try {
-        const {userId, cartItems} = req.body;
+        const { cartItems } = req.body; // frontend sends only cartItems
+        const userId = req.user.id;      // get authenticated user id from middleware
 
-        await User.findByIdAndUpdate(userId, {cartItems});
-        res.json({success:true, message: "Cart Updated"})
+        if (!userId) {
+            return res.status(401).json({ success: false, message: "Unauthorized" });
+        }
 
+        await User.findByIdAndUpdate(userId, { cartItems });
+        res.json({ success: true, message: "Cart Updated" });
     } catch (error) {
-        res.json({success:false, message: error.message});
+        res.status(500).json({ success: false, message: error.message });
     }
 }
