@@ -37,7 +37,7 @@ export const AppContextProvider = ({children}) => {
     console.error("Seller auth check failed:", error);
     setIsSeller(false);
   }
-};
+}
 
     //Fetch User Auth Status,User Data and Cart Items
      const fetchUser = async () => {
