@@ -17,7 +17,7 @@ const DetailsProduct = () => {
   useEffect(() => {
     if (products.length > 0 && product) {
       const productsCopy = products.filter(
-        (item) => item.category === product.category && item._id !== product._id
+        (item) => item.category === product.category && item._id == product._id
       );
       setRelatedProduct(productsCopy.slice(0, 5));
     }
